@@ -48,13 +48,6 @@ function eliminar(id) {
   mostrarTareas(tareas); // Actualiza la vista después de eliminar
 }
 
-// buscadortarea.addEventListener("input", () => {
-//   const tareaBuscada = buscadortarea.value;
-//   const tareasFiltradas = tareas.filter(
-//     (tarea) => tarea.tarea.toLowerCase().includes(tareaBuscada) // Filtra tareas que contienen la búsqueda
-//   );
-//   mostrarTareas(tareasFiltradas); // Muestra las tareas filtradas
-// });
 
 function buscar() {
   const buscarTarea = buscadortarea.value;
@@ -81,17 +74,13 @@ function cajitaSeleccionada(id) {
   contarSeleccionadas();
 }
 
-function contarSeleccionadas() {
-  const seleccionadas = tareas.filter(tarea => tarea.seleccionada).length;
-  const faltantes = tareas.length - seleccionadas;
-  realizadas.innerHTML = `${seleccionadas}`;
-  faltantes1.innerHTML = `${faltantes}`;
-}
 
-// let nombres = ["juan", "pedro", "fran"];
-// mostrar = nombres[0]
-// nombres[1] = "Victor"
-// console.log(nombres)
+function contarSeleccionadas() {
+  const selecciondas = tareas.filter(x => x.seleccionada).length
+  const faltantes = tareas.length - selecciondas;
+  selecciondas.innerHTML = selecciondas
+  faltantes1.innerHTML = faltantes
+}
 
 
 
