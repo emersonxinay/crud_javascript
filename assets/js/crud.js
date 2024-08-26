@@ -5,6 +5,8 @@ const buscadortarea = document.querySelector("#buscador");
 const buscandotareas = document.querySelector("#buscartarea");
 const contandotareas = document.querySelector("#contartareas");
 const mostrandotareas = document.querySelector("#mostrartareas");
+const faltantes1 = document.querySelector("#faltantes");
+const realizadas = document.querySelector("#realizadas");
 
 const tareas = []; // Aquí no hay un error, pero asegúrate de que esto está definido antes de usarlo
 let id = 0
@@ -17,7 +19,7 @@ let id = 0
 
 function crear() {
   const nuevaTarea = insertartarea.value;
-  tareas.push({ id: id++, tarea: nuevaTarea });
+  tareas.push({ id: id++, tarea: nuevaTarea, seleccionada: false });
   insertartarea.value = "";
   mostrarTareas(tareas);
 }
@@ -28,12 +30,15 @@ function mostrarTareas(tareas) {
   let html = "";
   for (let tare of tareas) {
     html += ` <li> ${tare.id} - ${tare.tarea} 
+    <input type="checkbox"  ${tare.seleccionada ? "checked" : ""} onchange="cajitaSeleccionada(${tare.id})">
     <button onclick="eliminar(${tare.id})">Eliminar</button>
     <button onclick="editar(${tare.id})">Editar</button>
     </li> `;
   }
   mostrandotareas.innerHTML = html; // Aquí se actualiza el HTML para mostrar las tareas
   contandotareas.innerHTML = tareas.length; // Muestra la cantidad de tareas
+  contarSeleccionadas();
+
 }
 
 function eliminar(id) {
@@ -68,6 +73,19 @@ function editar(id) {
   const nuevaTarea = prompt("Nueva tarea:", dato_tarea)
   tareas[indiceeditar].tarea = nuevaTarea
   mostrarTareas(tareas)
+}
+
+function cajitaSeleccionada(id) {
+  const index = tareas.findIndex((ele) => ele.id === id);
+  tareas[index].seleccionada = !tareas[index].seleccionada;
+  contarSeleccionadas();
+}
+
+function contarSeleccionadas() {
+  const seleccionadas = tareas.filter(tarea => tarea.seleccionada).length;
+  const faltantes = tareas.length - seleccionadas;
+  realizadas.innerHTML = `${seleccionadas}`;
+  faltantes1.innerHTML = `${faltantes}`;
 }
 
 // let nombres = ["juan", "pedro", "fran"];
