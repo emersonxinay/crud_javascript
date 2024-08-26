@@ -1,2 +1,2 @@
 # Crud Básico con JavaScript 
-### crear, Mostrar, editar y mostrar datos 
+### crear, Mostrar, editar y eliminar datos 
